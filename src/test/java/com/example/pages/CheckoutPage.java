@@ -43,9 +43,7 @@ public class CheckoutPage {
         Logger.getGlobal ().info (driver.findElement (orderPlacementELeOne).getText ().trim ());
         Logger.getGlobal ().info (driver.findElement (orderPlacementEleTwo).getText ().trim ());
         Assert.assertEquals (driver.findElement (orderPlacementELeOne).getText ().trim (),"THANK YOU FOR YOUR ORDER");
-        Assert.assertEquals (driver.findElement (orderPlacementEleTwo).getText ().trim (),"Your order has been dispatched, and will arrive just as fast as the pony can get\n" +
-                "                there!\n" +
-                "            ");
+        Assert.assertEquals (driver.findElement (orderPlacementEleTwo).getText ().trim (),"Your order has been dispatched, and will arrive just as fast as the pony can get there!");
     }
 
 }
