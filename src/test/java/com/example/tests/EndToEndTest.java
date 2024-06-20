@@ -1,8 +1,7 @@
 package com.example.tests;
 
 import com.example.listeners.TestListener;
-import com.example.pages.HomePage;
-import com.example.pages.LoginPage;
+import com.example.pages.*;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.testng.AllureTestNg;
@@ -13,9 +12,8 @@ import org.testng.annotations.Test;
 
 import java.util.logging.Logger;
 
-
 @Listeners ({AllureTestNg.class, TestListener.class})
-public class HomeTest extends BaseTest {
+public class EndToEndTest extends BaseTest{
 
     String url = "https://www.saucedemo.com/v1/index.html";
 
@@ -48,5 +46,30 @@ public class HomeTest extends BaseTest {
         Thread.sleep (2000);
 
         homePage.assertItemsOnOpenPanel ();
+
+        SideBarPage sideBarPage = new SideBarPage (getDriver ());
+        sideBarPage.clickAllItemsLink ();
+        //Wait for page to load
+        waitForPageToLoad ();
+
+        ProductsPage productsPage = new ProductsPage (getDriver ());
+        productsPage.numberOfItems ("Sauce Labs Backpack");
+        productsPage.clickOnCartLink ();
+
+        YourCartPage yourCartPage = new YourCartPage (getDriver ());
+        yourCartPage.validateVisibility ();
+        yourCartPage.validateProductAndPrice ("Sauce Labs Backpack","29.99");
+        yourCartPage.clickOnCheckoutBtn ();
+
+        waitForPageToLoad ();
+
+        CheckoutPage checkoutPage = new CheckoutPage (getDriver ());
+        checkoutPage.enterCustomerDetails ("Ram","Kumar","201305/Noida");
+        checkoutPage.clickOnContinueBtn ();
+
+        waitForPageToLoad ();
+        checkoutPage.clickOnFinishBtn ();
+
+        checkoutPage.validateOrderPlacementMsg ();
     }
 }

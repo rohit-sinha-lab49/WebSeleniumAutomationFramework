@@ -1,5 +1,6 @@
 package com.example.tests;
 
+import com.example.listeners.TestListener;
 import com.example.pages.HomePage;
 import com.example.pages.LoginPage;
 import io.qameta.allure.testng.AllureTestNg;
@@ -10,7 +11,7 @@ import org.testng.Assert;
 
 import java.util.logging.Logger;
 
-@Listeners ({AllureTestNg.class})
+@Listeners ({AllureTestNg.class, TestListener.class})
 public class LoginTest extends BaseTest {
 
     String url = "https://www.saucedemo.com/v1/index.html";

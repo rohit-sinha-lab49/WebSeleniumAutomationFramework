@@ -1,11 +1,17 @@
 package com.example.tests;
 
 import io.qameta.allure.Attachment;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
+
+import java.time.Duration;
 
 public class BaseTest {
     protected ThreadLocal<WebDriver> driver = new ThreadLocal<> ();
@@ -49,5 +55,15 @@ public class BaseTest {
     @Attachment(value = "Text Log", type = "text/plain")
     public String attachTextLog(String message) {
         return message;
+    }
+
+    public void waitForPageToLoad() {
+        new WebDriverWait (getDriver (), Duration.ofSeconds (10000)).until(
+                webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete")
+        );
+    }
+
+    public void waitForElement(By locator) {
+        new WebDriverWait(getDriver (), Duration.ofSeconds (10000)).until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 }
