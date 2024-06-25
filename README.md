@@ -95,6 +95,24 @@ This command will start a local server and open the Allure report in your defaul
 └── target
 └── allure-results # Allure results directory
 
+.
+├── pom.xml
+└── src
+    ├── main
+    │   └── java
+    │       └── com
+    │           └── yourpackage
+    │               └── ...
+    └── test
+        ├── java
+        │   └── com
+        │       └── yourpackage
+        │           └── tests
+        │               └── MyTest.java
+        └── resources
+            └── testng.xml
+
+
 
 ### Explanation
 
