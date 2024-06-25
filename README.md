@@ -79,20 +79,15 @@ This command will start a local server and open the Allure report in your defaul
 ## Project Structure
 ├── pom.xml # Project configuration for Maven
 ├── src
-│ ├── main
-│ │ └── java
-│ │ └── com
-│ │ └── yourpackage
-│ │ ├── pages # Page Object Model classes
-│ │ └── utils # Utility classes
 │ └── test
 │ └── java
 │ └── com
-│ └── yourpackage
-│ ├── tests # Test classes
+│ │ └── example
+│ │ ├── pages # Page Object Model classes
+│ │ └── utility # Utility classes
+│ │ └── tests # Test classes
 │ └── resources
 │ └── testng.xml # TestNG configuration file
-└── target
 └── allure-results # Allure results directory
 
 
@@ -100,12 +95,10 @@ This command will start a local server and open the Allure report in your defaul
 
 - **pom.xml**: The Maven configuration file.
 - **src**: The source directory.
-  - **main**: The main source code directory.
-    - **java**: The directory containing Java source files.
-      - **com/yourpackage/pages**: The package containing Page Object Model (POM) classes.
-      - **com/yourpackage/utils**: The package containing utility classes.
   - **test**: The test source code directory.
     - **java**: The directory containing Java test files.
+    - **com/example/pages**: The package containing Page Object Model (POM) classes.
+      - **com/yourpackage/utility**: The package containing utility classes.
       - **com/yourpackage/tests**: The package containing test classes.
     - **resources**: The resources directory for test configuration files.
       - **testng.xml**: The TestNG configuration file.
@@ -117,11 +110,11 @@ This command will start a local server and open the Allure report in your defaul
 Here's a brief overview of important files and directories in the project:
 
 - `pom.xml`: Maven project file containing dependencies and build configurations.
-- `src/main/java/com/yourpackage/pages`: Contains Page Object Model classes, which represent the web pages.
-- `src/main/java/com/yourpackage/utils`: Contains utility classes for common functions and helpers.
-- `src/test/java/com/yourpackage/tests`: Contains the test classes with TestNG test cases.
+- `src/test/java/com/example/pages`: Contains Page Object Model classes, which represent the web pages.
+- `src/test/java/com/example/utility`: Contains utility classes for common functions and helpers.
+- `src/test/java/com/example/tests`: Contains the test classes with TestNG test cases.
 - `src/test/resources/testng.xml`: Configuration file for TestNG.
-- `target/allure-results`: Directory where Allure stores test results for generating reports.
+- `allure-results`: Directory where Allure stores test results for generating reports.
 
 ## Example Usage
 
@@ -134,7 +127,7 @@ To run the tests and generate the Allure report, follow these steps:
 
 2. **Generate Allure Report**:
     ```sh
-    allure serve target/allure-results
+    allure serve allure-results
     ```
 
 This will start a local server and open the Allure report in your default web browser.
