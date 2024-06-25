@@ -1,0 +1,11 @@
+language: java
+jdk:
+  - openjdk8
+
+# Specify the build and test script
+script: mvn test
+
+# Define cache to speed up build process
+cache:
+  directories:
+    - $HOME/.m2
