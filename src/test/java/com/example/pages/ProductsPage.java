@@ -19,7 +19,9 @@ public class ProductsPage {
     }
 
     public void numberOfItems (String productName) {
-        List<WebElement> listOfItems = driver.findElements (By.xpath ("//div[@id='inventory_container']//div[@id='inventory_container']//div[@class='inventory_list']/div"));
+        String xpath = "//div[@id='inventory_container']//div[@id='inventory_container']//div[@class='inventory_list']/div";
+        List<WebElement> listOfItems = driver.findElements (By.xpath (xpath));
+        Assert.assertEquals (listOfItems.size (),6);
         if(listOfItems.size ()==6){
             for(WebElement ele : listOfItems){
                 String label = ele.findElement (By.xpath ("//div[@class='inventory_item_label']//a/div")).getText ().trim ();

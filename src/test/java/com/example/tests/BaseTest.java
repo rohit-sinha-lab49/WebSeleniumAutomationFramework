@@ -1,6 +1,9 @@
 package com.example.tests;
 
+import com.example.utility.Util;
+import io.qameta.allure.Allure;
 import io.qameta.allure.Attachment;
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -9,9 +12,14 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.ITestResult;
 import org.testng.annotations.*;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.Duration;
+import java.util.logging.Logger;
+
 
 public class BaseTest {
     protected ThreadLocal<WebDriver> driver = new ThreadLocal<> ();
@@ -65,5 +73,19 @@ public class BaseTest {
 
     public void waitForElement(By locator) {
         new WebDriverWait(getDriver (), Duration.ofSeconds (10000)).until(ExpectedConditions.visibilityOfElementLocated(locator));
+    }
+
+    @AfterMethod (alwaysRun = true)
+    public synchronized  void updateTestStatus(ITestResult result) throws IOException {
+        Logger.getGlobal ().info ("Updating result of test script "+result.getName ()+" to report :: updateTestStatus");
+        System.out.println("Driver value is : "+driver.get ());
+        if(result.getStatus ()==ITestResult.FAILURE){
+            System.out.println("Driver value is : "+driver.get ());
+            System.out.println ("Failure is observed for test : "+result.getName ());
+            File realScreenshotFileObtained = Util.takeScreenshot (driver.get (),result.getName ());
+            Allure.addAttachment ("Page Screenshot for test : "+result.getName (), FileUtils.openInputStream (realScreenshotFileObtained));
+        }else{
+            System.out.println ("No failure is observed for test : "+result.getName ());
+        }
     }
 }

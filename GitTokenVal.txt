@@ -1,0 +1,7 @@
+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
+
+git push https://rohitsinha025:git push https://<username>:<personal_access_token>@github.com/rohitsinha025/WebAutomationFramework.git
+>@github.com/rohitsinha025/WebAutomationFramework.git
+
+git push https://rohitsinha025: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@github.com/rohitsinha025/WebAutomationFramework.git
+

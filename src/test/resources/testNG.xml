@@ -1,8 +1,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="LoginTestSuite" parallel="classes" thread-count="2">
-    <listeners>
-        <listener class-name="com.example.listeners.TestListener" />
-    </listeners>
+
     <parameter name="browser" value="chrome"/>
 
     <test name="ChromeTest">
