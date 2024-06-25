@@ -1,6 +1,6 @@
 # Selenium Automation Framework
 
-[![Build Status](https://img.shields.io/travis/<your-username>/<your-repository>.svg?style=flat-square)](https://travis-ci.org/<your-username>/<your-repository>)
+[![Build Status](https://img.shields.io/travis/rohit-sinha-lab49/WebSeleniumAutomationFramework.svg?style=flat-square)](https://travis-ci.org/rohit-sinha-lab49/WebSeleniumAutomationFramework)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 This is a Selenium Automation Framework built on top of TestNG and integrated with Allure for reporting. This framework is designed to make writing and running automated tests easier and more efficient.
