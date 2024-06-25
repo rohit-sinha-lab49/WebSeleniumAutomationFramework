@@ -97,9 +97,9 @@ This command will start a local server and open the Allure report in your defaul
 - **src**: The source directory.
   - **test**: The test source code directory.
     - **java**: The directory containing Java test files.
-    - **com/example/pages**: The package containing Page Object Model (POM) classes.
-      - **com/yourpackage/utility**: The package containing utility classes.
-      - **com/yourpackage/tests**: The package containing test classes.
+      - **com/example/pages**: The package containing Page Object Model (POM) classes.
+      - **com/example/utility**: The package containing utility classes.
+      - **com/example/tests**: The package containing test classes.
     - **resources**: The resources directory for test configuration files.
       - **testng.xml**: The TestNG configuration file.
 - **target**: The output directory for compiled files and generated reports.
