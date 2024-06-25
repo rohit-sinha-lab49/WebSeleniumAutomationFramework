@@ -7,7 +7,7 @@
         <parameter name="username" value="standard_user"/>
         <parameter name="password" value="secret_sauce"/>
         <classes>
-            <!--<class name="com.example.tests.HomeTest"/>-->
+            <class name="com.example.tests.HomeTest"/>
             <class name="com.example.tests.EndToEndTest"/>
         </classes>
     </test>
