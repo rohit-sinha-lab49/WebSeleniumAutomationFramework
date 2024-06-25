@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: TestSuite
 -------------------------------------------------------------------------------
-Tests run: 2, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 33.885 s <<< FAILURE! - in TestSuite
-testFailure(com.example.tests.EndToEndTest)  Time elapsed: 0.058 s  <<< FAILURE!
+Tests run: 3, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 46.486 s <<< FAILURE! - in TestSuite
+testFailure(com.example.tests.EndToEndTest)  Time elapsed: 0.119 s  <<< FAILURE!
 java.lang.AssertionError: expected [nopCommerce demo store. Login...] but found [Swag Labs]
 	at com.example.tests.EndToEndTest.testFailure(EndToEndTest.java:88)
 
