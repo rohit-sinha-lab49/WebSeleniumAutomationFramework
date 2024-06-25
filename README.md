@@ -41,8 +41,8 @@ These instructions will help you set up and run the project on your local machin
 
 1. **Clone the repository**:
     ```sh
-    git clone https://github.com/<your-username>/<your-repository>.git
-    cd <your-repository>
+    git clone https://github.com/rohit-sinha-lab49/WebSeleniumAutomationFramework.git
+    cd WebSeleniumAutomationFramework.git
     ```
 
 2. **Install dependencies**:
