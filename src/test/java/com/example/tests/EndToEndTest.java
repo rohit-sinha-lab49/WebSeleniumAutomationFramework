@@ -85,6 +85,6 @@ public class EndToEndTest extends BaseTest {
     public void testFailure () {
         //Allure.addAttachment ("Failure",new ByteArrayInputStream (((TakesScreenshot) driver.get ()).getScreenshotAs (OutputType.BYTES)));
         System.out.println("Driver value is : "+driver.get ());
-        Assert.assertEquals (driver.get ().getTitle ().trim (),"nopCommerce demo store. Login...");
+        Assert.assertEquals (driver.get ().getTitle ().trim (),"Swag Labs");
     }
 }

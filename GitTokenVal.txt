@@ -5,3 +5,6 @@ git push https://rohitsinha025:git push https://<username>:<personal_access_toke
 
 git push https://rohitsinha025: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@github.com/rohitsinha025/WebAutomationFramework.git
 
+Jenkins
+Remote Token - 11de1626ba9e709f16c96003b519e0a88f
+
