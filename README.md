@@ -162,3 +162,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 Feel free to modify this template to better fit your project's needs. Add any additional sections or information that might be useful for users and contributors.
 
 
+//Deploy this on docker
+//Master/slave configuration [Multi commit execution]
+//BDD conversion
+//Send report on Teams using teams plugin
+
+
