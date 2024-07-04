@@ -1,0 +1,50 @@
+docker run -d -p 8080:8080 -p 50000:50000 -v jenkins_home:/var/jenkins_home --name jenkins jenkins/jenkins:lts
+docker run -p 8080:8080 -p 50000:50000 -d -v jenkins_home:/var/jenkins_home jenkins/jenkins:lts
+docker exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword
+RohitDockerJenkins
+docker stop jenkins
+docker rm jenkins
+
+java -jar jenkins.war
+
+
+Vim
+Exit without saving:
+
+Press Esc to enter normal mode.
+Type :q! and press Enter.
+
+------------------------
+
+FROM centos
+
+RUN yum -y install openssh-server
+
+RUN useradd remote_user && \
+    echo "1234" | passwd remote_user --stdin && \
+    mkdir /home/remote_user/.ssh && \
+    chmod 700 /home/remote_user/.ssh
+
+COPY remote-key.pub /home/remote_user/.ssh/authorized_keys
+
+RUN chown remote_user:remote_user -R /home/remote_user/.ssh/ && \
+    chmod 600 /home/remote_user/.ssh/authorized_keys
+
+RUN /usr/sbin/sshd-keygen
+
+CMD /usr/sbin/sshd -D
+
+----------------------
+
+FROM centos
+
+RUN cd /etc/yum.repos.d/
+RUN sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*
+RUN sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*
+
+RUN yum -y install java
+
+CMD /bin/bash
+
+
+
