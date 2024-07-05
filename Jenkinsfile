@@ -7,13 +7,13 @@ pipeline {
         stage('Build Maven'){
             steps{
                 checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/rohit-sinha-lab49/WebSeleniumAutomationFramework']])
-                bat 'mvn clean install'
+                bat 'mvn clean package -DskipTests'
             }
         }
         stage('Build docker image'){
             steps{
                 script{
-                    bat 'docker build -t rohitsinha025/devops-integration .'
+                    bat 'docker build -t rohitsinha025/selenium-docker-Onceagain -f ./Dockerfile .'
                 }
             }
         }
@@ -23,9 +23,23 @@ pipeline {
                     withCredentials([string(credentialsId: 'dockerhub-pwd', variable: 'dockerhubpwd')]) {
                         bat 'docker login -u rohitsinha025@gmail.com -p Hanuman@1209'
                         }
-                        bat 'docker push rohitsinha025/devops-integration'
+                        bat 'docker push rohitsinha025/selenium-docker-Onceagain'
                 }
             }
+        }
+        stage('Run image file and go to shell mode'){
+                    steps{
+                        script{
+                        bat 'docker run -it --entrypoint=/bin/sh rohitsinha025/selenium-docker-Onceagain'
+                    }
+                 }
+        }
+        stage('Execute testng.xml file'){
+                      steps{
+                          script{
+                          bat 'java -cp selenium-docker.jar:selenium-docker-tests.jar:libs/* org.testng.TestNG testng.xml'
+                      }
+                 }
         }
     }
 }

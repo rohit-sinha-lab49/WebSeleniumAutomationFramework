@@ -10,6 +10,6 @@ docker build -t rohitsinha025/selenium-docker-again -f ./Dockerfile .
 
 --To run the image file and go into shell mode
 docker run -it --entrypoint=/bin/sh rohitsinha025/selenium-docker-again
-docker run -it --entrypoint=/bin/sh -v "C:/Projects/Output:/Projects/SeleniumManagerProject/target/test-output" rohitsinha025/selenium-docker
+docker run -it --entrypoint=/bin/sh -v "C:/Projects/Output:/Projects/SeleniumManagerProject/target/test-output" rohitsinha025/selenium-docker-again
 
 java -cp selenium-docker.jar:selenium-docker-tests.jar:libs/* org.testng.TestNG testng.xml
