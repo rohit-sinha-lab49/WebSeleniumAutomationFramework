@@ -13,7 +13,7 @@ pipeline {
         stage('Build docker image'){
             steps{
                 script{
-                    bat 'docker build -t rohitsinha025/selenium-docker-Onceagain -f ./Dockerfile .'
+                    bat 'docker build -t rohitsinha025/selenium-docker-two -f ./Dockerfile .'
                 }
             }
         }
@@ -23,14 +23,14 @@ pipeline {
                     withCredentials([string(credentialsId: 'dockerhub-pwd', variable: 'dockerhubpwd')]) {
                         bat 'docker login -u rohitsinha025@gmail.com -p Hanuman@1209'
                         }
-                        bat 'docker push rohitsinha025/selenium-docker-Onceagain'
+                        bat 'docker push rohitsinha025/selenium-docker-two'
                 }
             }
         }
         stage('Run image file and go to shell mode'){
                     steps{
                         script{
-                        bat 'docker run -it --entrypoint=/bin/sh rohitsinha025/selenium-docker-Onceagain'
+                        bat 'docker run -it --entrypoint=/bin/sh rohitsinha025/selenium-docker-two'
                     }
                  }
         }
