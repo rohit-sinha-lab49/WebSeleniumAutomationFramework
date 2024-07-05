@@ -37,7 +37,7 @@ pipeline {
         stage('Execute testng.xml file'){
                       steps{
                           script{
-                          bat 'java -cp selenium-docker.jar:selenium-docker-tests.jar:libs/* org.testng.TestNG testng.xml'
+                          bat 'java -cp selenium-docker.jar:selenium-docker-tests.jar:libs/*'
                       }
                  }
         }
