@@ -13,7 +13,7 @@ pipeline {
         stage('Build docker image'){
             steps{
                 script{
-                    bat 'docker build -t testng.xml'
+                    bat 'docker build -t rohitsinha025/selenium-docker-again -f ./Dockerfile .'
                 }
             }
         }
