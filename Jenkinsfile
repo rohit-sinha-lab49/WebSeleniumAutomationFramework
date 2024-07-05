@@ -30,16 +30,16 @@ pipeline {
         stage('Run image file and go to shell mode'){
                     steps{
                         script{
-                        bat 'docker run --entrypoint=/bin/sh rohitsinha025/selenium-docker-two'
+                        bat 'docker run --rm rohitsinha025/selenium-docker-two'
                     }
                  }
         }
-        stage('Execute testng.xml file'){
+        /* stage('Execute testng.xml file'){
                       steps{
                           script{
-                          bat 'java -cp selenium-docker.jar:selenium-docker-tests.jar:libs/*'
+                          bat 'java -cp selenium-docker.jar:selenium-docker-tests.jar:libs *//*'
                       }
                  }
-        }
+        } */
     }
 }
