@@ -13,11 +13,11 @@ pipeline {
         stage('Build docker image'){
             steps{
                 script{
-                    bat 'docker build -t rohitsinha025/selenium-docker-two -f ./Dockerfile .'
+                    bat 'docker build -t testng.xml'
                 }
             }
         }
-        stage('Push image to Hub'){
+        /* stage('Push image to Hub'){
             steps{
                 script{
                     withCredentials([string(credentialsId: 'dockerhub-pwd', variable: 'dockerhubpwd')]) {
@@ -26,11 +26,12 @@ pipeline {
                         bat 'docker push rohitsinha025/selenium-docker-two'
                 }
             }
-        }
+        } */
         stage('Run image file and go to shell mode'){
                     steps{
                         script{
-                        bat 'docker run --rm rohitsinha025/selenium-docker-two'
+                        //bat 'docker run --rm rohitsinha025/selenium-docker-two'
+                        bat 'docker run --rm testng.xml'
                     }
                  }
         }
