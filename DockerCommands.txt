@@ -1,0 +1,15 @@
+--To create jar package below command
+mvn clean package -DskipTests
+
+--Navigate to target folder and then execute below command
+java -cp selenium-docker.jar;selenium-docker-tests.jar;libs/* org.testng.TestNG ../testng.xml
+java -cp selenium-docker.jar;selenium-docker-tests.jar;libs/* -DBROWSER=firefox org.testng.TestNG ../testng.xml
+
+--To build docker images below command
+docker build -t rohitsinha025/selenium-docker-again -f ./Dockerfile .
+
+--To run the image file and go into shell mode
+docker run -it --entrypoint=/bin/sh rohitsinha025/selenium-docker-again
+docker run -it --entrypoint=/bin/sh -v "C:/Projects/Output:/Projects/SeleniumManagerProject/target/test-output" rohitsinha025/selenium-docker
+
+java -cp selenium-docker.jar:selenium-docker-tests.jar:libs/* org.testng.TestNG testng.xml
