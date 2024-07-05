@@ -30,7 +30,7 @@ pipeline {
         stage('Run image file and go to shell mode'){
                     steps{
                         script{
-                        bat 'winpty docker run -it --entrypoint=/bin/sh rohitsinha025/selenium-docker-two'
+                        bat 'docker run --entrypoint=/bin/sh rohitsinha025/selenium-docker-two'
                     }
                  }
         }
