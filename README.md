@@ -213,13 +213,21 @@ Dockerfile
 The Dockerfile defines the steps to create the Docker image.
 
 FROM openjdk:11-jre-slim
+
 RUN apt-get update && apt-get install -y curl jq
+
 WORKDIR C:/Projects/SeleniumManagerProject
+
 COPY target/selenium-docker.jar selenium-docker.jar
+
 COPY target/selenium-docker-tests.jar selenium-docker-tests.jar
+
 COPY target/libs libs
+
 COPY testng.xml testng.xml
+
 ADD healthcheck.sh healthcheck.sh
+
 ENTRYPOINT sh healthcheck.sh
 
 # docker-compose.yaml
@@ -307,12 +315,16 @@ To stop the application and remove the Docker containers, run:
 docker-compose down
 
 Troubleshooting
+
 Ensure Docker and Docker Compose are installed and running.
+
 Make sure no other application is using the ports defined in docker-compose.yaml.
+
 Check the logs for any errors using docker-compose logs.
 
 
 License
+
 This project is licensed under the MIT License - see the LICENSE.md file for details.
 
 
