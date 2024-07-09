@@ -191,10 +191,6 @@ healthcheck.sh
 First, create the healthcheck.sh script. This script will check if the Selenium hub is ready.
 
 #!/usr/bin/env bash
-# Environment Variables
-# HUB_HOST
-# BROWSER
-# MODULE
 
 echo "Checking if hub is ready - $HUB_HOST"
 
@@ -207,11 +203,11 @@ java -cp selenium-docker.jar:selenium-docker-tests.jar:libs/* \
   -DHUB_HOST=$HUB_HOST \
   org.testng.TestNG $MODULE
 
-Make sure the script is executable:
+# Make sure the script is executable:
 
 chmod +x healthcheck.sh
 
-Update your Dockerfile to copy the healthcheck.sh script and use it before starting your Java application
+# Update your Dockerfile to copy the healthcheck.sh script and use it before starting your Java application
 
 Dockerfile
 
@@ -227,7 +223,7 @@ COPY testng.xml testng.xml
 ADD healthcheck.sh healthcheck.sh
 ENTRYPOINT sh healthcheck.sh
 
-docker-compose.yaml
+# docker-compose.yaml
 
 The docker-compose.yaml file defines the services to be run.
 
