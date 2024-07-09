@@ -285,20 +285,20 @@ services:
       - ./output:/Projects/SeleniumManagerProject/target/test-output
       
 
-### 1. Build the Maven Project
+# 1. Build the Maven Project
 
 First, you need to build the Maven project to generate the JAR file.
 
 ```sh
 mvn clean package -DskipTests
 
-2. Build the Docker Image
+# 2. Build the Docker Image
 
 After the Maven build is successful, build the Docker image.
 
 docker build -t rohitsinha025/selenium-docker-again -f ./Dockerfile .
 
-3. Run Docker Compose
+# 3. Run Docker Compose
 
 Once the Docker image is built, use Docker Compose to run the application.
 
