@@ -198,7 +198,6 @@ while [ "$(curl -s http://$HUB_HOST:4444/status | jq -r .value.ready)" != "true"
   sleep 1
 done
 
-# start the java command
 java -cp selenium-docker.jar:selenium-docker-tests.jar:libs/* \
   -DHUB_HOST=$HUB_HOST \
   org.testng.TestNG $MODULE
