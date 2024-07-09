@@ -304,17 +304,18 @@ Once the Docker image is built, use Docker Compose to run the application.
 
 docker-compose up
 
-Accessing the Application
+# 4. Accessing the Application
 
 Once the application is running, you can access it via http://localhost:4444/ui# (or any other port you have exposed).
 
-Cleaning Up
+# 5. Cleaning Up
 
 To stop the application and remove the Docker containers, run:
 
 docker-compose down
 
-Troubleshooting
+
+# Troubleshooting
 
 Ensure Docker and Docker Compose are installed and running.
 
