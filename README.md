@@ -186,7 +186,7 @@ This project demonstrates how to build a Maven project, create a Docker image, a
 
 ## Build and Run Instructions
 
-healthcheck.sh
+# healthcheck.sh
 
 First, create the healthcheck.sh script. This script will check if the Selenium hub is ready.
 
@@ -208,7 +208,7 @@ chmod +x healthcheck.sh
 
 # Update your Dockerfile to copy the healthcheck.sh script and use it before starting your Java application
 
-Dockerfile
+# Dockerfile
 
 The Dockerfile defines the steps to create the Docker image.
 
