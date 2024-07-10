@@ -5,14 +5,11 @@ import com.example.pages.*;
 import com.example.utility.Constants;
 import io.qameta.allure.*;
 import io.qameta.allure.testng.AllureTestNg;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import java.io.ByteArrayInputStream;
 import java.util.logging.Logger;
 
 @Listeners ({AllureTestNg.class , TestListener.class})
