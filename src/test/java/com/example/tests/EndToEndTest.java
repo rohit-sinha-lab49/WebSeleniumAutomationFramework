@@ -2,6 +2,7 @@ package com.example.tests;
 
 import com.example.listeners.TestListener;
 import com.example.pages.*;
+import com.example.utility.Constants;
 import io.qameta.allure.*;
 import io.qameta.allure.testng.AllureTestNg;
 import org.openqa.selenium.OutputType;
@@ -17,19 +18,17 @@ import java.util.logging.Logger;
 @Listeners ({AllureTestNg.class , TestListener.class})
 public class EndToEndTest extends BaseTest {
 
-    String url = "https://www.saucedemo.com/v1/index.html";
-
     @Test (priority = 1)
     @Parameters ({"username" , "password"})
     @Severity (SeverityLevel.CRITICAL)
     public void testLogin (String username , String password) throws InterruptedException {
         System.out.println ("Driver id : " + driver.get ());
-        getDriver ().get (url); // Replace with the actual URL
+        getDriver ().get (Constants.portalURL); // Replace with the actual URL
 
         String title = driver.get ().getTitle ();
         attachScreenshot ();
         attachTextLog ("Title of the page: " + title);
-        Logger.getGlobal ().info ("URL : " + url);
+        Logger.getGlobal ().info ("URL : " + Constants.portalURL);
 
         LoginPage loginPage = new LoginPage (getDriver ());
 
