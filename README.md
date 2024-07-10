@@ -159,10 +159,190 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [Allure](http://allure.qatools.ru/)
 - [WebDriverManager](https://github.com/bonigarcia/webdrivermanager)
 
+
+## Overview
+
+This project demonstrates how to build a Maven project, create a Docker image, and run the application using Docker Compose.
+
+## Prerequisites
+
+- Java 11
+- Maven
+- Docker
+- Docker Compose
+
+## Project Structure
+
+.
+├── Dockerfile
+├── docker-compose.yaml
+├── pom.xml
+├── src
+│ └── test
+|  └── java
+│ └── ...
+└── README.md
+
+
+## Build and Run Instructions
+
+# healthcheck.sh
+
+First, create the healthcheck.sh script. This script will check if the Selenium hub is ready.
+
+#!/usr/bin/env bash
+
+echo "Checking if hub is ready - $HUB_HOST"
+
+while [ "$(curl -s http://$HUB_HOST:4444/status | jq -r .value.ready)" != "true" ]; do
+  sleep 1
+done
+
+java -cp selenium-docker.jar:selenium-docker-tests.jar:libs/* \
+  -DHUB_HOST=$HUB_HOST \
+  org.testng.TestNG $MODULE
+
+# Make sure the script is executable:
+
+chmod +x healthcheck.sh
+
+# Update your Dockerfile to copy the healthcheck.sh script and use it before starting your Java application
+
+# Dockerfile
+
+The Dockerfile defines the steps to create the Docker image.
+
+FROM openjdk:11-jre-slim
+
+RUN apt-get update && apt-get install -y curl jq
+
+WORKDIR C:/Projects/SeleniumManagerProject
+
+COPY target/selenium-docker.jar selenium-docker.jar
+
+COPY target/selenium-docker-tests.jar selenium-docker-tests.jar
+
+COPY target/libs libs
+
+COPY testng.xml testng.xml
+
+ADD healthcheck.sh healthcheck.sh
+
+ENTRYPOINT sh healthcheck.sh
+
+# docker-compose.yaml
+
+The docker-compose.yaml file defines the services to be run.
+
+version: "3"
+services:
+  selenium-hub:
+    image: selenium/hub:4.16.1-20231219
+    container_name: selenium-hub
+    ports:
+      - "4444:4444"
+
+  chrome:
+    image: selenium/node-chrome:4.16.1-20231219
+    shm_size: 2gb
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+
+  firefox:
+    image: selenium/node-firefox:4.16.1-20231219
+    shm_size: 2gb
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+
+  edge:
+    image: selenium/node-edge:4.16.1-20231219
+    shm_size: 2gb
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+
+  search-module:
+    image: rohitsinha025/selenium-docker-again
+    depends_on:
+      - chrome
+      - firefox
+      - edge
+    environment:
+      - HUB_HOST=selenium-hub
+      - MODULE=testng.xml
+    volumes:
+      - ./output:/Projects/SeleniumManagerProject/target/test-output
+      
+
+# 1. Build the Maven Project
+
+First, you need to build the Maven project to generate the JAR file.
+
+```sh
+mvn clean package -DskipTests
+
+# 2. Build the Docker Image
+
+After the Maven build is successful, build the Docker image.
+
+docker build -t rohitsinha025/selenium-docker-again -f ./Dockerfile .
+
+# 3. Run Docker Compose
+
+Once the Docker image is built, use Docker Compose to run the application.
+
+docker-compose up
+
+# 4. Accessing the Application
+
+Once the application is running, you can access it via http://localhost:4444/ui# (or any other port you have exposed).
+
+# 5. Cleaning Up
+
+To stop the application and remove the Docker containers, run:
+
+docker-compose down
+
+
+# Troubleshooting
+
+Ensure Docker and Docker Compose are installed and running.
+
+Make sure no other application is using the ports defined in docker-compose.yaml.
+
+Check the logs for any errors using docker-compose logs.
+
+
+License
+
+This project is licensed under the MIT License - see the LICENSE.md file for details.
+
+
+### Additional Notes
+
+- Replace `your-application.jar` with the actual name of your JAR file.
+- Adjust the ports and network settings in `docker-compose.yaml` as needed.
+- Ensure all required dependencies are included in your `pom.xml`.
+
+This `README.md` provides a comprehensive guide for users to build and run your project using Maven, Docker, and Docker Compose.
+
+
 Feel free to modify this template to better fit your project's needs. Add any additional sections or information that might be useful for users and contributors.
 
 
-//Deploy this on docker
+Framework is under development and will always be! 😊
+
 //Master/slave configuration [Multi commit execution]
 //BDD conversion
 //Send report on Teams using teams plugin
