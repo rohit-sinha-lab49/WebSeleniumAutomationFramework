@@ -1,5 +1,10 @@
 package com.example.tests;
 
+import com.example.capabilities.BrowserCapabilities;
+import com.example.capabilities.DriverFactory;
+import com.example.utility.Constants;
+import com.example.utility.DockerComposeStatusChecker;
+import com.example.utility.EnvironmentSetup;
 import com.example.utility.Util;
 import io.qameta.allure.Allure;
 import io.qameta.allure.Attachment;
@@ -29,64 +34,32 @@ import java.util.logging.Logger;
 
 
 public class BaseTest {
-    protected ThreadLocal<WebDriver> driver = new ThreadLocal<> ();
+    public WebDriver driver;
 
     @BeforeClass
-    //@BeforeMethod
-    @Parameters ({"browser"})
-    public void setUp (String browser) throws MalformedURLException {
+    @Parameters ({"browser","runEnv"})
+    public void setUp (String browser, String runEnv) throws IOException {
         System.out.println ("Browser is : " + browser);
+        //boolean flag = DockerComposeStatusChecker.isDockerComposeServiceUp (Constants.serviceName);
         if (browser.equalsIgnoreCase ("chrome")) {
-            System.out.println ("Inside : " + browser);
-            ChromeOptions options = new ChromeOptions ();
-            options.setAcceptInsecureCerts (true);
-
-            DesiredCapabilities desiredCapabilities = new DesiredCapabilities ();
-            desiredCapabilities.setCapability (ChromeOptions.CAPABILITY , options);
-
-            //URL url = new URL ("http://localhost:4444/wd/hub");
-
-            driver.set (new RemoteWebDriver (new URL (hubURL ()) , desiredCapabilities));
-            System.out.println ("Driver value is : " + driver.get ());
-            System.out.println ("URL is : " + driver.get ().getCurrentUrl ());
+            driver = DriverFactory.getDriver  (DriverFactory.Browser.CHROME,runEnv);
         } else if (browser.equalsIgnoreCase ("firefox")) {
-            FirefoxOptions firefoxOptions = new FirefoxOptions ();
-            firefoxOptions.setAcceptInsecureCerts (true);
-
-            DesiredCapabilities desiredCapabilities = new DesiredCapabilities ();
-            desiredCapabilities.setCapability (FirefoxOptions.FIREFOX_OPTIONS , firefoxOptions);
-
-            driver.set (new RemoteWebDriver (new URL (hubURL ()) , desiredCapabilities));
-            System.out.println ("Driver value is : " + driver.get ());
-            System.out.println ("URL is : " + driver.get ().getCurrentUrl ());
+            driver = DriverFactory.getDriver  (DriverFactory.Browser.FIREFOX,runEnv);
         } else if (browser.equalsIgnoreCase ("edge")) {
-            EdgeOptions edgeOptions = new EdgeOptions ();
-            edgeOptions.setAcceptInsecureCerts (true);
-
-            DesiredCapabilities desiredCapabilities = new DesiredCapabilities ();
-            desiredCapabilities.setCapability (EdgeOptions.CAPABILITY , edgeOptions);
-
-            driver.set (new RemoteWebDriver (new URL (hubURL ()) , desiredCapabilities));
-            System.out.println ("Driver value is : " + driver.get ());
-            System.out.println ("URL is : " + driver.get ().getCurrentUrl ());
+            driver = DriverFactory.getDriver  (DriverFactory.Browser.Edge,runEnv);
         } else {
             throw new IllegalArgumentException ("Browser value is not supported : " + browser);
         }
-        driver.get ().manage ().window ().maximize ();
+        driver.manage ().window ().maximize ();
     }
 
     @AfterClass
-    //@AfterMethod
     public void tearDown () {
-        WebDriver webDriver = getDriver ();
-        if (webDriver != null) {
-            webDriver.quit ();
-            driver.remove ();
-        }
+        DriverFactory.quitDriver ();
     }
 
     public WebDriver getDriver () {
-        return driver.get ();
+        return driver;
     }
 
     @Attachment (value = "Page Screenshot", type = "image/png")
@@ -113,11 +86,11 @@ public class BaseTest {
     @AfterMethod (alwaysRun = true, enabled = true)
     public synchronized void updateTestStatus (ITestResult result) throws IOException {
         Logger.getGlobal ().info ("Updating result of test script " + result.getName () + " to report :: updateTestStatus");
-        System.out.println ("Driver value is : " + driver.get ());
+        System.out.println ("Driver value is : " + driver);
         if (result.getStatus () == ITestResult.FAILURE) {
-            System.out.println ("Driver value is : " + driver.get ());
+            System.out.println ("Driver value is : " + driver);
             System.out.println ("Failure is observed for test : " + result.getName ());
-            File realScreenshotFileObtained = Util.takeScreenshot (driver.get () , result.getName ());
+            File realScreenshotFileObtained = Util.takeScreenshot (driver , result.getName ());
             Allure.addAttachment ("Page Screenshot for test : " + result.getName () , FileUtils.openInputStream (realScreenshotFileObtained));
         } else {
             System.out.println ("No failure is observed for test : " + result.getName ());

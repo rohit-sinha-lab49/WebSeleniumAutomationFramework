@@ -19,7 +19,7 @@ public class LoginTest extends BaseTest {
     @Test(priority = 1)
     @Parameters ({"username" , "password"})
     public void testLogin (String username, String password) {
-        System.out.println ("Driver id : "+driver.get ());
+        System.out.println ("Driver id : "+driver);
         getDriver ().get (url); // Replace with the actual URL
 
         Logger.getGlobal ().info ("URL : "+url);

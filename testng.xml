@@ -1,14 +1,26 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="LoginTestSuite" parallel="classes" thread-count="2">
 
-    <parameter name="browser" value="chrome"/>
+    <!--<parameter name="browser" value="chrome"/>-->
+    <parameter name="runEnv" value="docker"/>
 
     <test name="ChromeTest">
         <parameter name="username" value="standard_user"/>
         <parameter name="password" value="secret_sauce"/>
+        <parameter name="browser" value="chrome"/>
         <classes>
             <class name="com.example.tests.HomeTest"/>
             <class name="com.example.tests.EndToEndTest"/>
+        </classes>
+    </test>
+
+    <test name="FirefoxTest">
+        <parameter name="username" value="standard_user"/>
+        <parameter name="password" value="secret_sauce"/>
+        <parameter name="browser" value="firefox"/>
+        <classes>
+            <class name="com.example.tests.LoginTest"/>
+            <class name="com.example.tests.HomeTest"/>
         </classes>
     </test>
 

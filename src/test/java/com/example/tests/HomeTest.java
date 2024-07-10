@@ -22,10 +22,10 @@ public class HomeTest extends BaseTest {
     @Parameters ({"username" , "password"})
     @Severity (SeverityLevel.CRITICAL)
     public void testLogin (String username, String password) throws InterruptedException {
-        System.out.println ("Driver id : "+driver.get ());
+        System.out.println ("Driver id : "+driver);
         getDriver ().get (Constants.portalURL); // Replace with the actual URL
 
-        String title = driver.get ().getTitle();
+        String title = driver.getTitle();
         attachScreenshot();
         attachTextLog("Title of the page: " + title);
         Logger.getGlobal ().info ("URL : "+Constants.portalURL);
