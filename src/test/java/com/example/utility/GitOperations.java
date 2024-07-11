@@ -5,6 +5,7 @@ import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.PushCommand;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.api.errors.JGitInternalException;
+import org.eclipse.jgit.transport.RefSpec;
 import org.eclipse.jgit.transport.SshSessionFactory;
 import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
 import com.jcraft.jsch.JSch;
@@ -35,6 +36,10 @@ public class GitOperations {
             }
         });
 
+        String localRepoPath = "C:/Projects/SeleniumManagerProject";
+        String remoteRepoUri = "git@github.com:rohit-sinha-lab49/WebSeleniumAutomationFramework.git";
+        String branchName = "featureOne";
+
         try {
             // Clone the repository (if not already cloned)
             // Git.cloneRepository()
@@ -42,7 +47,7 @@ public class GitOperations {
             // .setDirectory(new File("/path/to/repo"))
             // .call();
 
-            File repoDir = new File("C:/Projects/SeleniumManagerProject");
+            File repoDir = new File(localRepoPath);
 
             File lockFile = new File(repoDir, ".git/index.lock");
             if (lockFile.exists()) {
@@ -60,7 +65,10 @@ public class GitOperations {
             git.commit().setMessage("Your commit message").call();
 
             // Push the changes to the remote repository
-            git.push().call();
+            git.push()
+                    .setRemote("origin")
+                    .setRefSpecs(new RefSpec (branchName))
+                    .call();
 
         } catch (IOException e) {
             System.err.println("IOException: " + e.getMessage());
