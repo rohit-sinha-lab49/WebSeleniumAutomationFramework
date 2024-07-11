@@ -31,7 +31,9 @@ public class GitOperations {
             @Override
             protected JSch createDefaultJSch(FS fs) throws JSchException {
                 JSch jsch = super.createDefaultJSch(fs);
-                jsch.addIdentity(System.getProperty("user.home") + "/.ssh/id_rsa");
+                String s  = "C:\\Projects\\sshKey\\New folder\\id_rsa";
+                //jsch.addIdentity(System.getProperty("user.home") + "/.ssh/id_rsa");
+                jsch.addIdentity(s);
                 return jsch;
             }
         });
