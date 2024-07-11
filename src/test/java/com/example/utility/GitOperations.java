@@ -60,9 +60,7 @@ public class GitOperations {
             git.commit().setMessage("Your commit message").call();
 
             // Push the changes to the remote repository
-            PushCommand pushCommand = git.push();
-            pushCommand.setCredentialsProvider(new UsernamePasswordCredentialsProvider("rohit-sinha-lab49", "Sensex$#12345"));
-            pushCommand.call();
+            git.push().call();
 
         } catch (IOException e) {
             System.err.println("IOException: " + e.getMessage());
