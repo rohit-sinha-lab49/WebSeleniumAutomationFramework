@@ -36,6 +36,8 @@ public class GitOperations {
                 try {
                     // Adding the private key
                     jsch.addIdentity(System.getProperty("user.home") + "/.ssh/id_rsa");
+                    // Set the known_hosts file
+                    jsch.setKnownHosts(System.getProperty("user.home") + "/.ssh/known_hosts");
                 } catch (JSchException e) {
                     System.err.println("Failed to add identity: " + e.getMessage());
                     throw e;
