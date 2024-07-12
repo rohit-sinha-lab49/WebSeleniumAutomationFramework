@@ -32,8 +32,14 @@ public class GitOperations {
 
             @Override
             protected JSch createDefaultJSch(FS fs) throws JSchException {
-                JSch jsch = super.createDefaultJSch(fs);
-                jsch.addIdentity(System.getProperty("user.home") + "/.ssh/id_rsa");
+                JSch jsch = new JSch();
+                try {
+                    // Adding the private key
+                    jsch.addIdentity(System.getProperty("user.home") + "/.ssh/id_rsa");
+                } catch (JSchException e) {
+                    System.err.println("Failed to add identity: " + e.getMessage());
+                    throw e;
+                }
                 return jsch;
             }
         });
