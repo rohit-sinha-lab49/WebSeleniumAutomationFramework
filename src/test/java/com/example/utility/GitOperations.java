@@ -16,6 +16,7 @@ import org.eclipse.jgit.util.FS;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -57,7 +58,13 @@ public class GitOperations {
             }
 
             // Open the existing repository
-            Git git = Git.open(repoDir);
+            Git git = Git.open(new File(localRepoPath));
+
+            // Add remote repository
+            git.remoteAdd()
+                    .setName("origin")
+                    .setUri(new org.eclipse.jgit.transport.URIish(remoteRepoUri))
+                    .call();
 
             // Add all files to the staging area
             git.add().addFilepattern(".").call();
@@ -77,6 +84,8 @@ public class GitOperations {
         } catch (GitAPIException e) {
             System.err.println("GitAPIException: " + e.getMessage());
             e.printStackTrace();
+        } catch (URISyntaxException e) {
+            e.printStackTrace ();
         }
     }
 }
