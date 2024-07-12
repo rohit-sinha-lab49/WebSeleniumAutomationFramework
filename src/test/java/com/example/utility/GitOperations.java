@@ -26,6 +26,7 @@ public class GitOperations {
             @Override
             protected void configure(OpenSshConfig.Host host, Session session) {
                 // Use the default configuration
+
             }
 
             @Override
