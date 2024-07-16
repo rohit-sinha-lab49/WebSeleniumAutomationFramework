@@ -32,14 +32,11 @@ pipeline {
                 }
             }
         }
-        stage('Run Image with Docker Compose') {
+        stage('Run Docker Compose file') {
                     steps {
                         script {
                             // Ensure docker-compose file is updated with the correct image tag
-                            sh """
-                            sed -i 's|image: ${env.IMAGE_NAME}:.*|image: ${env.IMAGE_NAME}:${env.BUILD_NUMBER}|g' ${DOCKER_COMPOSE_FILE}
-                            docker-compose -f ${DOCKER_COMPOSE_FILE} up -d
-                            """
+                           bat 'docker-compose up'
                         }
                     }
                 }
@@ -53,9 +50,18 @@ pipeline {
         /* stage('Execute testng.xml file'){
                       steps{
                           script{
-                          bat 'java -cp selenium-docker.jar:selenium-docker-tests.jar:libs *//*'
+                          bat 'java -cp selenium-docker.jar:selenium-docker-tests.jar:libs *//*  *//*'
                       }
                  }
-        } */
+        }  */
     }
+
+     post {
+            always {
+                // Clean up
+                script {
+                    bat 'docker-compose down'
+                }
+            }
+        }
 }
