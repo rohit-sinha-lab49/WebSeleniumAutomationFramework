@@ -3,6 +3,11 @@ pipeline {
     tools{
         maven 'Maven3'
     }
+    environment {
+            DOCKER_HUB_CREDENTIALS = credentials([string(credentialsId: 'rohitsinha025@gmail.com', variable: 'Hanuman@1209')]) // Jenkins credentials ID
+            IMAGE_NAME = 'rohitsinha025/selenium-docker-again'
+            DOCKER_COMPOSE_FILE = 'docker-compose.yaml'
+        }
     stages{
         stage('Build Maven'){
             steps{
@@ -13,7 +18,7 @@ pipeline {
         stage('Build docker image'){
             steps{
                 script{
-                    bat 'docker build -t rohitsinha025/selenium-docker-fresh -f ./Dockerfile .'
+                    bat 'docker build -t rohitsinha025/selenium-docker-again -f ./Dockerfile .'
                 }
             }
         }
@@ -23,17 +28,28 @@ pipeline {
                     withCredentials([string(credentialsId: 'dockerhub-pwd', variable: 'dockerhubpwd')]) {
                         bat 'docker login -u rohitsinha025@gmail.com -p Hanuman@1209'
                         }
-                        bat 'docker push rohitsinha025/selenium-docker-fresh'
+                        bat 'docker push rohitsinha025/selenium-docker-again'
                 }
             }
         }
-        stage('Run image file and go to shell mode'){
+        stage('Run Image with Docker Compose') {
+                    steps {
+                        script {
+                            // Ensure docker-compose file is updated with the correct image tag
+                            sh """
+                            sed -i 's|image: ${env.IMAGE_NAME}:.*|image: ${env.IMAGE_NAME}:${env.BUILD_NUMBER}|g' ${DOCKER_COMPOSE_FILE}
+                            docker-compose -f ${DOCKER_COMPOSE_FILE} up -d
+                            """
+                        }
+                    }
+                }
+        /* stage('Run image file and go to shell mode'){
                     steps{
                         script{
-                        bat 'docker run --rm rohitsinha025/selenium-docker-fresh'
+                        bat 'docker run --rm rohitsinha025/selenium-docker-again'
                     }
                  }
-        }
+        } */
         /* stage('Execute testng.xml file'){
                       steps{
                           script{
