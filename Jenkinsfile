@@ -29,17 +29,20 @@ pipeline {
                         bat 'docker login -u rohitsinha025@gmail.com -p Hanuman@1209'
                         }
                         bat 'docker push rohitsinha025/selenium-docker-again'
-                }
-            }
-        }
+                   }
+               }
+          }
         stage('Run Docker Compose file') {
                     steps {
                         script {
                             // Ensure docker-compose file is updated with the correct image tag
-                           bat 'docker-compose up'
+                            withCredentials([string(credentialsId: 'dockerhub-pwd', variable: 'dockerhubpwd')]) {
+                            bat 'docker login -u rohitsinha025@gmail.com -p Hanuman@1209'
+                            }
+                            bat 'docker-compose up'
                         }
                     }
-                }
+        }
         /* stage('Run image file and go to shell mode'){
                     steps{
                         script{
@@ -60,6 +63,9 @@ pipeline {
             always {
                 // Clean up
                 script {
+                withCredentials([string(credentialsId: 'dockerhub-pwd', variable: 'dockerhubpwd')]) {
+                                            bat 'docker login -u rohitsinha025@gmail.com -p Hanuman@1209'
+                                            }
                     bat 'docker-compose down'
                 }
             }
