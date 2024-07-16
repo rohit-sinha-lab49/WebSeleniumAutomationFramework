@@ -22,7 +22,7 @@ pipeline {
                 }
             }
         }
-         /* stage('Push image to Hub'){
+         stage('Push image to Hub'){
             steps{
                 script{
                     withCredentials([string(credentialsId: 'dockerhub-pwd', variable: 'dockerhubpwd')]) {
@@ -31,7 +31,7 @@ pipeline {
                         bat 'docker push rohitsinha025/selenium-docker-again'
                    }
                }
-          } */
+          }
         stage('Run Docker Compose file') {
                     steps {
                         script {
