@@ -4,7 +4,7 @@ pipeline {
         maven 'Maven3'
     }
     environment {
-            DOCKER_HUB_CREDENTIALS = credentials([string(credentialsId: 'rohitsinha025@gmail.com', variable: 'Hanuman@1209')]) // Jenkins credentials ID
+            //DOCKER_HUB_CREDENTIALS = credentials([string(credentialsId: 'rohitsinha025@gmail.com', variable: 'Hanuman@1209')]) // Jenkins credentials ID
             IMAGE_NAME = 'rohitsinha025/selenium-docker-again'
             DOCKER_COMPOSE_FILE = 'docker-compose.yaml'
         }
