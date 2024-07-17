@@ -4,8 +4,11 @@ com\example\listeners\TestListener.class
 com\example\utility\Util.class
 com\example\utility\Constants.class
 com\example\pages\ProductsPage.class
+com\example\utility\GitOperations.class
 com\example\capabilities\DriverFactory.class
+com\example\utility\GitOperations$1.class
 com\example\pages\YourCartPage.class
+com\example\utility\JSCH.class
 com\example\capabilities\DriverFactory$1.class
 com\example\pages\SideBarPage.class
 com\example\utility\DockerComposeStatusChecker.class

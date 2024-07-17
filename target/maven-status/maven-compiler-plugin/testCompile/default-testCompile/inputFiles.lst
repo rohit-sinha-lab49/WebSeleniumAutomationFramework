@@ -5,11 +5,13 @@ C:\Projects\SeleniumManagerProject\src\test\java\com\example\pages\YourCartPage.
 C:\Projects\SeleniumManagerProject\src\test\java\com\example\utility\Constants.java
 C:\Projects\SeleniumManagerProject\src\test\java\com\example\pages\ProductsPage.java
 C:\Projects\SeleniumManagerProject\src\test\java\com\example\pages\CheckoutPage.java
+C:\Projects\SeleniumManagerProject\src\test\java\com\example\utility\JSCH.java
 C:\Projects\SeleniumManagerProject\src\test\java\com\example\capabilities\DriverFactory.java
 C:\Projects\SeleniumManagerProject\src\test\java\com\example\utility\ScreenshotUtils.java
 C:\Projects\SeleniumManagerProject\src\test\java\com\example\capabilities\BrowserCapabilities.java
 C:\Projects\SeleniumManagerProject\src\test\java\com\example\pages\LoginPage.java
 C:\Projects\SeleniumManagerProject\src\test\java\com\example\tests\HomeTest.java
+C:\Projects\SeleniumManagerProject\src\test\java\com\example\utility\GitOperations.java
 C:\Projects\SeleniumManagerProject\src\test\java\com\example\pages\SideBarPage.java
 C:\Projects\SeleniumManagerProject\src\test\java\com\example\tests\BaseTest.java
 C:\Projects\SeleniumManagerProject\src\test\java\com\example\utility\EnvironmentSetup.java
